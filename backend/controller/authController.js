@@ -15,7 +15,7 @@ export const registration = async (req, res) => {
       return res.status(400).json({ message: "Enter valid Email" });
     }
 
-    if (password.lenght < 8) {
+    if (password.length < 8) {
       return res.status(400).json({ message: "Enter Strong password" });
     }
 
@@ -27,7 +27,7 @@ export const registration = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: false,
-      samesite: "Strict",
+      sameSite: "Strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     console.log(token);
@@ -54,7 +54,7 @@ export const login = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: false,
-      samesite: "Strict",
+      sameSite: "Strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     return res.status(201).json(user);
@@ -66,7 +66,12 @@ export const login = async (req, res) => {
 
 export const logOut = async (req, res) => {
   try {
-    res.clearCookie(token);
+    res.cookie("token", "", {
+      httpOnly: true,
+      expires: new Date(0),
+      secure: false,
+      sameSite: "lax",
+    });
     return res.status(200).json({ message: "logOut successful" });
   } catch (error) {
     console.log("logOut errro");
@@ -89,7 +94,7 @@ export const googleLogin = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: false,
-      samesite: "Strict",
+      sameSite: "Strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     return res.status(200).json(user);

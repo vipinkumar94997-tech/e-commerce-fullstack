@@ -14,11 +14,11 @@ let app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser);
+app.use(cookieParser());
 app.use(
   cors({
     origin: "http://localhost:5173",
-    withcredentials: true,
+    credentials: true,
   }),
 );
 
