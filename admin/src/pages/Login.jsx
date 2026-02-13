@@ -3,16 +3,28 @@ import Logo from "../assets/logo.png";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeSharp } from "react-icons/io5";
 import { useState } from "react";
+import axios from "axios";
+import { useContext } from "react";
+import { authDataContext } from "../context/Authcontext";
 
 function Login() {
   let [show, setshow] = useState();
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
+  let { serverUrl } = useContext(authDataContext);
 
   const AdminLogin = async (e) => {
     e.preventDefault();
     try {
-    } catch (error) {}
+      const result = await axios.post(
+        serverUrl + "/api/auth/adminlogin",
+        { email, password },
+        { withCredentials: true },
+      );
+      console.log(result.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -31,7 +43,7 @@ function Login() {
       <div className="max-w-150 w-[90%] h-100 bg-[#b91c1c25] border border-[#96969635] backdrop:blur-2xl rounded-lg shadow-lg flex items-center justify-center">
         <form
           action=""
-          onClick={AdminLogin}
+          onSubmit={AdminLogin}
           className="w-[90%] h-[90%] flex flex-col items-center justify-start gap-5"
         >
           <div className="w-[90%] h-100 flex flex-col items-center justify-center gap-3.75 relative">
@@ -53,13 +65,13 @@ function Login() {
             />
             {!show && (
               <IoEyeOutline
-                className="w-5 h-5 cursor-pointer absolute right-[5%] bottom-[57%]"
+                className="w-5 h-5 cursor-pointer absolute right-[5%] bottom-[50%]"
                 onClick={() => setshow((prev) => !prev)}
               />
             )}
             {show && (
               <IoEyeSharp
-                className="w-5 h-5 cursor-pointer absolute right-[5%] bottom-[57%]"
+                className="w-5 h-5 cursor-pointer absolute right-[5%] bottom-[50%]"
                 onClick={() => setshow((prev) => !prev)}
               />
             )}
