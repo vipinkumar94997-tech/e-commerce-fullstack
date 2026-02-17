@@ -7,7 +7,9 @@ import AuthContext from "./context/Authcontext.jsx";
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <AuthContext>
-      <App />
+      <AdminContext>
+        <App />
+      </AdminContext>
     </AuthContext>
   </BrowserRouter>,
 );
