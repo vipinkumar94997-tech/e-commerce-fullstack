@@ -2,13 +2,13 @@ import jwt from "jsonwebtoken";
 
 const adminAuth = async (req, res, next) => {
   try {
-    let { token } = req.cookies;
+    const token = req.cookies?.token;
 
-    if (token) {
+    if (!token) {
       return res.status(400).json({ message: "Not Authorized login Again " });
     }
 
-    let verifyToken = jwt.verify(token, process.env.JWT.SECRET);
+    let verifyToken = jwt.verify(token, process.env.JWT_SECRET);
     if (!verifyToken) {
       return res
         .status(400)

@@ -7,8 +7,8 @@ import cors from "cors";
 import userRoutes from "./routes/userRoutes.js";
 dotenv.config();
 
-// let port = process.env.PORT || 5000;
-let port = 8000;
+let port = process.env.PORT || 8000;
+// let port = 8000;
 
 let app = express();
 

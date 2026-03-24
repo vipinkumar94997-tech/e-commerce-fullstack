@@ -31,7 +31,9 @@ export const registration = async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     console.log(token);
-    return res.status(201).json(user);
+    console.log(email, password);
+    console.log(process.env.ADMIN_EMAIL, process.env.ADMIN_PASSWORD);
+    return res.status(201).json({ token });
   } catch (error) {
     console.log("registration errro");
     return res.status(500).json({ message: `registration  error ${error}` });

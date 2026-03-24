@@ -18,7 +18,7 @@ function UserContext({ children }) {
     } catch (error) {
       setAdminData(null);
       console.log(error);
-      console.log(serverUrl);
+      console.log("Server URL:", serverUrl);
     }
   };
 
